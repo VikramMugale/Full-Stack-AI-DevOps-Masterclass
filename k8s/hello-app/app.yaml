@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-app
+  template:
+    metadata:
+      labels:
+        app: hello-app
+    spec:
+      containers:
+      - name: hello-app
+        image: vikrammugale/hello-python
+        # env:
+        #   - name: ENV_VALUE
+        #     value: "Hello from app.yaml"
+        #   - name: DB_PASSWORD
+        #     value: "fgnvdfbbx="
+        env:
+        - name: ENV_VALUE
+          valueFrom:
+            configMapKeyRef:
+              name: hello-app-config
+              key: HELLO_APP_MESSAGE
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: hello-db-secret
+              key: HELLO_DB_PASSWORD
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app
+spec:
+  selector:
+    app: hello-app
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 32001
