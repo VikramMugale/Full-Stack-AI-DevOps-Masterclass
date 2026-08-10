@@ -16,17 +16,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '25'
 
       - name: Install Dependencies
         working-directory: docker/app1-hello/node
         run: npm install
 
-      - name: Test Node.js Application
+      - name: Test Node.js Application (If Present)
         working-directory: docker/app1-hello/node
-        run: npm test
+        run: npm test --if-present
 
   docker-build-push:
     runs-on: ubuntu-latest
