@@ -79,7 +79,10 @@ jobs:
 
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v3
-        
+
+      - name: Check AWS Identity
+        run: aws sts get-caller-identity
+          
       - name: Update Kubeconfig for EKS
         run: |
           aws eks update-kubeconfig --name hello-cluster --region us-east-1
