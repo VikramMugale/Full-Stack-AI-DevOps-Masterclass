@@ -54,6 +54,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Check Docker files
+        run: |
+         echo "Current directory:"
+         pwd
+
+         echo "Repository contents:"
+         find docker/app1-hello -type f
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
