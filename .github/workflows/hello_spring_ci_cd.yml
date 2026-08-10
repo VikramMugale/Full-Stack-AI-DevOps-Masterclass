@@ -82,7 +82,7 @@ jobs:
         
       - name: Update Kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --name hello-cluster --region ap-south-1a
+          aws eks update-kubeconfig --name hello-cluster --region us-east-1
       
       - name: Verify connection to EKS cluster
         run: |
