@@ -1,10 +1,10 @@
 name: Hello Spring Boot APP to Docker
 
 on:
-#   workflow_dispatch:
+  workflow_dispatch:
   push:
-    # paths:
-    #   - 'docker/app1-hello/springboot/hello-spring/**'
+    paths:
+      - 'docker/app1-hello/springboot/hello-spring/**'
 
 jobs:
   build-test:
@@ -53,14 +53,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Check Docker files
-        run: |
-         echo "Current directory:"
-         pwd
-
-         echo "Repository contents:"
-         find docker/app1-hello -type f
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
