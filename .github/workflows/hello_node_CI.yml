@@ -5,7 +5,7 @@ on:
 
   push:
     paths:
-      - 'docker/app1-hello/node/**'
+      - 'docker/app1-hello/node'
 
 jobs:
   build-test:
